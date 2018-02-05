@@ -3,7 +3,7 @@ set -e
 
 this_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 temp_dir=$(mktemp -d)
-trap "rm -rf $temp_dir" EXIT SIGTERM
+trap "rm -rf $temp_dir" EXIT
 ls "$temp_dir"
 cp "$this_dir/../go.sh" "$temp_dir/"
 cd "$temp_dir"
