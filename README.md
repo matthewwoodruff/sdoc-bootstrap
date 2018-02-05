@@ -1,5 +1,7 @@
 # sdoc bootstrap
 
+[![Build Status](https://travis-ci.org/matthewwoodruff/sdoc-bootstrap.svg?branch=master)](https://travis-ci.org/matthewwoodruff/sdoc-bootstrap)
+
 ### Usage
 
 - Create a new directory for your CLI `mkdir my-cli && cd my-cli`
