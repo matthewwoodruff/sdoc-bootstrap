@@ -6,6 +6,7 @@ temp_dir=$(mktemp -d)
 trap "rm -rf $temp_dir" EXIT
 ls "$temp_dir"
 cp "$this_dir/../go.sh" "$temp_dir/"
+cp "$this_dir/expected.txt" "$temp_dir/"
 cd "$temp_dir"
 
 input=$(cat <<HERE
@@ -97,27 +98,7 @@ then
   exit 3
 fi
 
-output=$(./bin/my-cli)
-expected=$(cat <<HERE
-Downloading sdoc
-
-Usage: my-cli <command> [args]
-
-Built-in Commands:
-  help        h     Show help for all commands or a specific command
-  edit        e     Edit the implementation of a command
-  edit-config ec    Edit the configuration file
-  view        v     View the implementation of a command
-
-Commands:
-  hello             Prints hello world
-HERE
-)
-
-if [[ "$output" != "$expected" ]]
-then
-  echo fail
-  exit 4
-fi
+./bin/my-cli > output.txt
+diff -by output.txt expected.txt
 
 exit 0
