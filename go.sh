@@ -29,21 +29,22 @@ main() {
 #! /bin/bash
 set -ue
 
-cd \$( dirname "\${BASH_SOURCE[0]}" )
+this_dir=\$(cd \$( dirname "\${BASH_SOURCE[0]}" ) && pwd )
 
-if ! [ -e "bin/sdoc" ]
+if ! [ -e "\$this_dir/bin/sdoc" ]
 then
   echo "Downloading sdoc"
   target=\$([ "\$(uname -s)" = 'Darwin' ] && echo 'apple-darwin' || echo 'unknown-linux-musl')
+  pushd "\$this_dir" > /dev/null
   mkdir -p bin
   cd bin
   curl -LO --progress-bar https://github.com/matthewwoodruff/sdoc/releases/download/v$VERSION/sdoc-v$VERSION-x86_64-\$target.tar.gz
   tar -xzf *.tar.gz
   rm *.tar.gz
-  cd ../
+  popd > /dev/null
 fi
 
-COMMANDS_DIRECTORY=../ CLI_NAME=$cli_name bin/sdoc "\$@"
+COMMANDS_DIRECTORY="\$this_dir/.." CLI_NAME=$cli_name "\$this_dir/bin/sdoc" "\$@"
 HERE
 )
 
