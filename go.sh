@@ -7,7 +7,7 @@ BLUE="$(tput setaf 4 2> /dev/null || echo -n '')"
 GREEN="$(tput setaf 2 2> /dev/null || echo -n '')"
 RED="$(tput setaf 1 2> /dev/null || echo -n '')"
 
-VERSION=0.3.2
+VERSION=0.4.0
 
 main() {
   echo
@@ -60,7 +60,7 @@ HERE
     - name: hello
       description: Prints hello world
       type:
-        Shell: echo hello world
+        shell: echo hello world
 HERE
 )
 
